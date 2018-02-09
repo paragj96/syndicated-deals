@@ -1,0 +1,73 @@
+namespace org.marnet.loan.auction
+
+asset Loan identified by lin {
+  o String lin
+  o Double loanAmt
+  --> Bank cdoOwner
+  --> Borrower borrower
+}
+
+enum ListingState {
+  o FOR_SALE
+  o RESERVE_NOT_MET
+  o SOLD
+}
+
+asset LoanListing identified by listingId {
+  o String listingId
+  o Double reserveRoi
+  o ListingState state
+  o String term
+  o Integer installment
+  o String grade
+  o String emp_length
+  o String property_ownership
+  o Long annual_revenue
+  o String verification_status
+  o String purpose
+  o Double dti /* Debt to income ratio */
+  o Integer deling_2yrs /* The number of 30+ days past-due incidences of delinquency */
+  o Integer inq_last_6mths /* Number of inquiries */
+  o Integer open_acc /* The number of open credit lines in the borrowers credit file */
+  o Integer totol_acc /* The total number of credit loans */
+  o Integer pub_rec /* Number of derogatory public records */
+  o String initial_list_status /* Lisiting status of loan (Possible value - W / F) */
+  o String loan_status
+  o Offer[] offers optional
+  --> Loan loan
+}
+
+/*
+asset CdoAgreement identified by agreementId {
+  o String agreementId
+  --> Bank sellerFirm
+  --> Investor buyerFirm
+  --> Loan relatedLoan
+}
+*/ 
+abstract participant User identified by email {
+  o String email
+  o String firmName
+}
+
+participant Bank extends User {
+}
+
+participant Investor extends User {
+}
+
+participant Borrower extends User {
+}
+
+
+
+transaction Offer {
+  o Double bidRoi
+  --> LoanListing listing
+  --> Investor investor
+}
+
+transaction CloseBidding {
+  --> LoanListing listing
+}
+

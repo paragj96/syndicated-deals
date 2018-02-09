@@ -1,0 +1,60 @@
+/**
+ * Access Control List for the auction network.
+ */
+rule Bank {
+    description: "Allow the Bank full access"
+    participant: "org.marnet.loan.auction.Bank"
+    operation: ALL
+    resource: "org.marnet.loan.auction.*"
+    action: ALLOW
+}
+
+rule Investor {
+    description: "Allow the Investor read access"
+    participant: "org.marnet.loan.auction.Investor"
+    operation: READ
+    resource: "org.marnet.loan.auction.*"
+    action: ALLOW
+}
+
+rule LoanOwner {
+    description: "Allow the owner of a Loan total access"
+    participant(m): "org.marnet.loan.auction.Bank"
+    operation: ALL
+    resource(v): "org.marnet.loan.auction.Loan"
+    condition: (v.cdoOwner.getIdentifier() == m.getIdentifier())
+    action: ALLOW
+}
+
+rule LoanListingOwner {
+    description: "Allow the owner of a Loan total access to their loan listing"
+    participant(m): "org.marnet.loan.auction.Bank"
+    operation: ALL
+    resource(v): "org.marnet.loan.auction.LoanListing"
+    condition: (v.loan.cdoOwner.getIdentifier() == m.getIdentifier())
+    action: ALLOW
+}
+
+rule SystemACL {
+  description:  "System ACL to permit all access"
+  participant: "org.hyperledger.composer.system.Participant"
+  operation: ALL
+  resource: "org.hyperledger.composer.system.**"
+  action: ALLOW
+}
+
+rule NetworkAdminUser {
+    description: "Grant business network administrators full access to user resources"
+    participant: "org.hyperledger.composer.system.NetworkAdmin"
+    operation: ALL
+    resource: "**"
+    action: ALLOW
+}
+
+rule NetworkAdminSystem {
+    description: "Grant business network administrators full access to system resources"
+    participant: "org.hyperledger.composer.system.NetworkAdmin"
+    operation: ALL
+    resource: "org.hyperledger.composer.system.**"
+    action: ALLOW
+}
