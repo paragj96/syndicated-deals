@@ -20,9 +20,11 @@
  */
 function closeBidding(closeBidding) {
     var listing = closeBidding.listing;
+    /*
     if(listing.state !== 'FOR_SALE'){
         throw new Error('Listing is not FOR SALE');
     }
+    */
     // by default we mark the listing as RESERVE_NOT_MET
     listing.state = 'RESERVE_NOT_MET';
     var lowestOffer = null;
