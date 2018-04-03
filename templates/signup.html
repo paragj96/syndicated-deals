@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+<meta content="utf-8" http-equiv="encoding">
+<html lang="en">
+  <head>
+    <title>Python Flask Credit Risk Management Module </title>
+ 
+    
+    <link href="http://getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet">
+ 
+    <link href="http://getbootstrap.com/examples/jumbotron-narrow/jumbotron-narrow.css" rel="stylesheet">
+    <link href="../static/signup.css" rel="stylesheet">
+    
+  </head>
+ 
+  <body>
+ 
+    <div class="container">
+      <div class="header">
+       
+       
+        <h3 class="text-muted">Python Flask Application</h3>
+      </div>
+ 
+      <div class="jumbotron">
+        <h1>Credit Risk Management Module</h1>
+        <form class="form" action="http://localhost:5000/signUp" method="POST">
+        <label for="inputName" class="sr-only">Name</label>
+        <input type="name" name="inputName" id="inputName"  placeholder="Name" required autofocus>
+        <label for="loan_amnt" class="sr-only">Loan Amount</label>
+        <input type="number" name="inputAmount" id="inputAmount" class="form-control" placeholder="Loan Amount" required autofocus>
+        <label for="term" class="sr-only">Term</label>
+        <input type="number" name="term" id="term" class="form-control" placeholder="years" required>
+	  <p><input type = "submit" value = "submit" /></p>
+         
+        <button id="btnSignUp" class="btn btn-lg btn-primary btn-block" type="button">Sign up</button>
+      </form>
+      </div>
+ 
+       
+ 
+      <footer class="footer">
+        <p>&copy; Company 2015</p>
+      </footer>
+ 
+    </div>
+	
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+<script type='text/javascript'>
+    $(function() {
+    $('#btnSignUp').click(function() {
+ 
+      /*  $.ajax({
+            url: '/signUp',
+	    contentType: 'application/json',
+	    dataType: 'text',
+            data: JSON.stringify({
+		"name":"test"}),
+            type: 'POST',
+            success: function(response) {
+                console.log(response);
+            },
+            error: function(error) {
+                console.log(error);
+            }
+        });
+    });
+});
+*/
+</script>
+  </body>
+</html>
