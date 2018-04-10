@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>Add Loan Details</title>
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("button").click(function () {
+
+                var dataProperty = {
+                    "$class": "org.marnet.loan.auction.LoanListing",
+                    "listingId": $('#listingId').val(),
+                    "reserveRoi": $('#reserveRoi').val(),
+                    "state": "FOR_SALE",
+                    "term": $('#term').val(),
+                    "installment": $('#installment').val(),
+                    "grade": $('#grade').val(),
+                    "emp_length": $('#emp_length').val(),
+                    "property_ownership": $('#property_ownership').val(),
+                    "annual_revenue": $('#annual_revenue').val(),
+                    "verification_status": $('#verification_status').val(),
+                    "purpose": $('#purpose').val(),
+                    "dti": $('#dti').val(),
+                    "deling_2yrs": $('#deling_2yrs').val(),
+                    "inq_last_6mths": $('#inq_last_6mths').val(),
+                    "open_acc": $('#open_acc').val(),
+                    "totol_acc": $('#totol_acc').val(),
+                    "pub_rec": $('#pub_rec').val(),
+                    "initial_list_status": $('#initial_list_status').val(),
+                    "loan_status": $('#loan_status').val(),
+                    "loan": "org.marnet.loan.auction.Loan#" + $('#lin').val(),
+                }
+
+                console.log( JSON.stringify( dataProperty));
+
+
+
+                $.post("http://13.127.13.152:3000/api/org.marnet.loan.auction.LoanListing",
+                            dataProperty,
+                            function (data, status) {
+                                alert("Data: " + JSON.stringify(data) + "\nStatus: " + status);
+                            });
+                            alert("Details Submitted");
+                            window.location="http://13.127.13.152:8082/addLoanDetails.html";
+            });
+        });
+
+
+    </script>
+
+
+
+</head>
+<body>
+
+    <div align="center" id="loanContainer">
+        <h3> Add Loan Details </h3>
+
+        Listing Id :
+        <input type="text" id="listingId" />
+        <br />
+
+        Reserved Rate of Interest :
+        <input type="text" id="reserveRoi" />
+        <br />
+
+        Term :
+        <input type="text" id="term" />
+        <br />
+
+        Installments :
+        <input type="text" id="installment" />
+        <br />
+
+        Grade :
+        <input type="text" id="grade" />
+        <br />
+
+        Employment Length :
+        <input type="text" id="emp_length" />
+        <br />
+
+        Property Ownership :
+        <input type="text" id="property_ownership" />
+        <br />
+
+        Annual Revenue :
+        <input type="text" id="annual_revenue" />
+        <br />
+
+        Verification Status :
+        <input type="text" id="verification_status" />
+        <br />
+
+        Purpose :
+        <input type="text" id="purpose" />
+        <br />
+
+        Debt to income ratio :
+        <input type="text" id="dti" />
+        <br />
+
+        Number of 30+ days past-due incidences of delinquency :
+        <input type="text" id="deling_2yrs" />
+        <br />
+
+        Number of inquiries in last 6 months :
+        <input type="text" id="inq_last_6mths" />
+        <br />
+
+        Number of open credit lines in the borrowers credit file :
+        <input type="text" id="open_acc" />
+        <br />
+
+        Total number of credit loans :
+        <input type="text" id="totol_acc" />
+        <br />
+
+        Number of derogatory public records :
+        <input type="text" id="pub_rec" />
+        <br />
+
+        Lisiting status of loan (Possible value - W / F) :
+        <input type="text" id="initial_list_status" />
+        <br />
+
+        Loan Status :
+        <input type="text" id="loan_status" />
+        <br />
+
+        Loan ID :
+        <input type="text" id="lin" />
+        <br />
+        
+
+        <button id="submitData">Submit </button>
+       
+
+
+    </div>
+
+
+
+</body>
+</html>
