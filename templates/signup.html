@@ -4,7 +4,51 @@
 <html lang="en">
   <head>
     <title>Python Flask Credit Risk Management Module </title>
- 
+ 	  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("button").click(function () {
+
+                var dataProperty = {
+                    "$class": "org.marnet.loan.auction.LoanListing",
+                    "listingId": $('#listingId').val(),
+                    "reserveRoi": $('#reserveRoi').val(),
+                    "state": "FOR_SALE",
+                    "term": $('#term').val(),
+                    "installment": $('#installment').val(),
+                    "grade": $('#grade').val(),
+                    "emp_length": $('#emp_length').val(),
+                    "property_ownership": $('#property_ownership').val(),
+                    "annual_revenue": $('#annual_revenue').val(),
+                    "verification_status": $('#verification_status').val(),
+                    "purpose": $('#purpose').val(),
+                    "dti": $('#dti').val(),
+                    "deling_2yrs": $('#deling_2yrs').val(),
+                    "inq_last_6mths": $('#inq_last_6mths').val(),
+                    "open_acc": $('#open_acc').val(),
+                    "totol_acc": $('#totol_acc').val(),
+                    "pub_rec": $('#pub_rec').val(),
+                    "initial_list_status": $('#initial_list_status').val(),
+                    "loan_status": $('#loan_status').val(),
+                    "loan": "org.marnet.loan.auction.Loan#" + $('#lin').val(),
+                }
+
+                console.log( JSON.stringify( dataProperty));
+
+
+
+                $.post("http://13.127.13.152:3000/api/org.marnet.loan.auction.LoanListing",
+                            dataProperty,
+                            function (data, status) {
+                                alert("Data: " + JSON.stringify(data) + "\nStatus: " + status);
+                            });
+                            alert("Details Submitted");
+                            window.location="http://13.127.13.152:8082/addLoanDetails.html";
+            });
+        });
+
+
+    </script>
     
     <link href="http://getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet">
  
@@ -16,57 +60,117 @@
   <body>
  
     <div class="container">
-      <div class="header">
+     
        
-       
-        <h3 class="text-muted">Python Flask Application</h3>
-      </div>
+       <div align="left" id="loanContainer">
+        <h3> Add Loan Details </h3>
+   
  
       <div class="jumbotron">
         <h1>Credit Risk Management Module</h1>
         <form class="form" action="http://localhost:5000/signUp" method="POST">
-        <label for="inputName" class="sr-only">Name</label>
-        <input type="name" name="inputName" id="inputName"  placeholder="Name" required autofocus>
-        <label for="loan_amnt" class="sr-only">Loan Amount</label>
-        <input type="number" name="inputAmount" id="inputAmount" class="form-control" placeholder="Loan Amount" required autofocus>
-        <label for="term" class="sr-only">Term</label>
-        <input type="number" name="term" id="term" class="form-control" placeholder="years" required>
-	  <p><input type = "submit" value = "submit" /></p>
+      	  
+	Listing Id :
+        <input type="text" name="listingId" id="listingId" />
+        <br />
+
+	 Loan Amount :
+        <input type="number" name="inputAmount" id="inputAmount" />
+        <br />
+
+        Reserved Rate of Interest :
+        <input type="number" name="reserveRoi" id="reserveRoi" step="any"/>
+        <br />
+
+	Rate of Interest by bank:
+        <input type="number" name='int_rate' id='int_rate' step="any"/>
+        <br />
+
+        Term :
+        <input type="number" name="term" id="term" />
+        <br />
+
+        Installments :
+        <input type="number" name="installment"  id="installment" step="any" />
+        <br />
+
+        Grade :
+        <input type="text" name="grade" id="grade" />
+        <br />
+
+        Employment Length :
+        <input type="number" name="emp_length" id="emp_length" step="any"/>
+        <br />
+
+        Property Ownership :
+        <input type="text" name="property_ownership" id="property_ownership" />
+        <br />
+
+        Annual Revenue :
+        <input type="number" name="annual_revenue" id="annual_revenue" step="any" />
+        <br />
+
+        Verification Status :
+        <input type="text" name="verification_status" id="verification_status" />
+        <br />
+
+        Purpose :
+        <input type="text" name="purpose" id="purpose" />
+        <br />
+
+        Debt to income ratio :
+        <input type="number" name="dti" id="dti" step="any" />
+        <br />
+
+        Revolt balance :
+        <input type="number" name="revol_bal" id='revol_bal' step="any" />
+        <br />
+
+        Revolt utility:
+        <input type="number" name="revol_util" id="revol_util" step="any"/>
+        <br />
+
+	Collections of 12 months (med): 
+        <input type="number" name='collections_12_mths_ex_med' id='collections_12_mths_ex_med' />
+        <br />
+
+ 	Account delinqency now: 
+        <input type="number" name='acc_now_delinq' id='acc_now_delinq' />
+        <br />
+        
+	Delinqency 2 years: 
+        <input type="number" name='delinq_2yrs' id='delinq_2yrs' />
+        <br />
+
+	Inquiries in last 6 months: 
+        <input type="number" name='inq_last_6mths' id='inq_last_6mths' />
+        <br />
+
+	Number of open credit lines in the borrowers credit file (Open account) :
+        <input type="number" name="open_acc" id="open_acc" />
+        <br />
+
+        Total accounts open) :
+        <input type="number" name="total_acc" id="total_acc" />
+        <br />
+
+        Number of derogatory public records :
+        <input type="number" name="pub_rec" id="pub_rec" />
+        <br />
+
+        Loan ID :
+        <input type="text" name="lin" id="lin" />
+        <br />
+        <p><input type = "submit" value = "submit" /></p>
          
-        <button id="btnSignUp" class="btn btn-lg btn-primary btn-block" type="button">Sign up</button>
-      </form>
-      </div>
- 
-       
- 
-      <footer class="footer">
-        <p>&copy; Company 2015</p>
+          </form>
+    </div>
+<footer class="footer">
+        <p>&copy; Parag Jain && Sonee Paghdar</p>
       </footer>
  
     </div>
-	
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-<script type='text/javascript'>
-    $(function() {
-    $('#btnSignUp').click(function() {
- 
-      /*  $.ajax({
-            url: '/signUp',
-	    contentType: 'application/json',
-	    dataType: 'text',
-            data: JSON.stringify({
-		"name":"test"}),
-            type: 'POST',
-            success: function(response) {
-                console.log(response);
-            },
-            error: function(error) {
-                console.log(error);
-            }
-        });
-    });
-});
-*/
+
 </script>
   </body>
 </html>
